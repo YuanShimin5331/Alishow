@@ -1,0 +1,48 @@
+1-获取所有的评论数据
+    请求方式：get 
+    url:  ./comments/comGet.php 
+    data:
+        page: 页码  
+        pageNum ：一页多少条
+    返回数据的格式:json 
+    数据说明：
+
+2-删除数据的接口：
+    请求方式：post
+     url:  ./comments/comDel.php 
+     data: id 要删除数据的id
+    返回数据的格式：json
+        说明：status 状态码 200表示成功
+              msg :操作消息
+
+3-批准功能的接口：
+        请求方式：post
+        url: ./comments/comApprove.php
+        data: id 要批准的数据
+        返回的数据格式：json
+          说明：status 状态码 200表示成功
+              msg :操作消息
+
+4-批量删除
+    请求方式：post
+     url:  ./comments/comDel.php 
+     data: id 要删除数据的id
+             示例：id='1,2,3,4';
+    返回数据的格式：json
+        说明：status 状态码 200表示成功
+              msg :操作消息
+
+5-批量批准
+        请求方式：post
+        url: ./comments/comApprove.php
+        data: id 要批准的数据
+                示例：id='1,2,3,4';
+        返回的数据格式：json
+          说明：status 状态码 200表示成功
+              msg :操作消息
+
+6-获取评论总条数
+     请求方式： get post  
+     url: ./comment/comTotal.php
+     data: 空
+     返回的数据格式：json

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        textarea{
+            width: 500px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <textarea ></textarea>
+    <script src="./wangEditor.min.js"></script>
+    <script src="../jquery-1.12.4.js"></script>
+    <script>
+
+        var E = window.wangEditor
+        var editor = new E('#box')
+
+        //当编辑器内容改变后，会调用
+        //html  编辑器中内容
+        //onchange 需要在create之前绑定
+        editor.customConfig.onchange = function (html) {
+            // 监控变化，同步更新到 textarea
+           $('textarea').val(html);
+        }
+
+        editor.create();//生成富文本编辑器
+
+        //设置内容
+        editor.txt.html('<p>呵呵呵</p>');        
+
+
+    </script>
+</body>
+</html>

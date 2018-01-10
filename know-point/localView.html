@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file"  id="file">
+    <img src="" alt="">
+    <script src="./jquery-1.12.4.js"></script>
+    <script>
+        
+        //把图片显示在页面上
+
+        $('#file').on('change',function(){
+
+            ////当选择文件后，获取选中的图片
+            console.log(this.files[0]);
+            //this  DOM对象
+            //$(this) jquery对象
+
+            var file=this.files[0];//获取文件域选中第一个文件
+            //图片 
+            var url=URL.createObjectURL(file); //返回的是file对象url
+            $('img').attr('src',url);
+
+        })
+    </script>
+
+
+</body>
+</html>

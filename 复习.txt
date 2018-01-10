@@ -1,0 +1,75 @@
+1-昨天的问题
+    分页：
+    问题：获取数据时 使用 联合查询，获取的是comments.post_id = post.id 复合条件的数据
+
+    //返回评论的总条数
+    $sql="select count(*) as total from comments
+        join posts  on comments.post_id=posts.id   -- 在查询总数是也要加上这个条件
+    ";
+
+    删除：
+        500条  50页 300条  30页 
+        删除数据会导致数据总数发送改变，当数据总数发发生改变后，总页数会发送改变
+        分页的标签数量也会随之改变，需要重新调用渲染分页标签的代码 ，遂应封装成一个方法
+
+        逻辑：每次删除后，都应该调用渲染分页标签的方法
+
+
+        如果删除最后一页，删除完后，会跳转到第一页，
+             render(window.currentPage);  数据保持当前页
+             分页的标签要保持当前页 设置  current_page：window.currentPage 
+
+
+2-迭代开发
+    边开发 边测试 边修改 2-->3--->4 
+
+3-根据筛选条件 进行渲染
+     1-修改接口
+        在后台获取前端选中的 状态 和分类id
+        让 用where条件筛选出 符合 状态和 分类的数据  用 like 和 % 进行模糊匹配，
+        方便查询所有分类和状态
+
+        sql 语句的语法顺序 ：
+            select posts.* ,users.name from  表名  【表连接】 【where条件】 【排序】 【limit截取】 
+
+             order  by posts.id desc  
+             order  by posts.id  通过 文字的id 进行排序 默认是升序排列 
+             desc  表示降序 
+
+    2-通过ajax请求数据，调用render方法时，传递 后台接口需要的 分类id 和状态
+      
+            
+4-写文章
+    1-打开页面
+        需要加载 内容 ：
+            分类下拉列表要动态渲染 ajax实现
+            文字的状态要动态渲染 
+            时间标签 默认显示当前时间 利用moment插件
+                  var t1=moment().format('YYYY-MM-DDThh:mm'); //默认当前时间                  
+                  $('#created').val(t1);
+            同步显示slug别名
+                h5新增事件：oninput 当表单输入时触发 
+                      $('#slug').on('input',function(){
+                            //把表单中输入的值 填充给strong标签
+                            $('#slug-strong').text($(this).val()); 
+                      });
+
+
+    2-默认文件域允许选择任何文件，可以通过 accept 属性限制：
+        <input id="feature" class="form-control" name="feature" type="file" accept="image/*">
+        <input type="file" name="pic" id="pic" accept="image/gif, image/jpeg" />
+
+    3-图片实时显示：
+            input.onchange=function(){
+                var file=this.files[0]; 
+                var url= URL.createObjectURL(file);
+                $('img').attr('src','url'); 
+            }
+     
+   4-富文本编辑器
+        http://www.wangeditor.com/        
+5-修改文章
+     1-获取文章数据填充到页面，
+     2-通过js把数据填充到页面
+    
+
